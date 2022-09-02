@@ -1,0 +1,25 @@
+mc:
+  period: 5 # интервал взаимодействия (в секундах)
+  websocket:
+    host: localhost
+    port: 9292
+
+server:
+  port: 8081
+
+  
+spring:
+  flyway:
+    enabled: true
+    locations: 'classpath:db/migration'
+    baseline-on-migrate: true
+    user: 'root'
+    password: 'maria'
+    driver-class-name: 'org.mariadb.jdbc.Driver'
+    url: 'jdbc:mariadb://localhost:3306/mc'
+    validate-migration-naming: true
+  datasource:
+    driver-class-name: 'org.mariadb.jdbc.Driver'
+    url: 'jdbc:mariadb://localhost:3306/mc'
+    username: 'root'
+    password: 'maria'

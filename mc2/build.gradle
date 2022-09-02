@@ -1,0 +1,44 @@
+buildscript {
+    ext {
+        camelVersion = "3.18.1"
+        springBootVersion = "2.7.3"
+    }
+}
+
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "$springBootVersion"
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+    id 'com.bmuschko.docker-spring-boot-application' version '8.0.0'
+}
+
+group 'org.example'
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    
+    implementation "org.apache.camel:camel-api:$camelVersion"
+    implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
+    implementation "org.apache.camel.springboot:camel-websocket-starter:$camelVersion"
+    implementation "org.apache.camel.springboot:camel-kafka-starter:$camelVersion"
+    implementation "org.apache.camel.springboot:camel-jackson-starter:$camelVersion"
+
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+docker {
+    springBootApplication {
+        baseImage = 'openjdk:18'
+        ports = [9090, 8080]
+        images = ["evilball/mc2:${version}", 'evilball/mc2:latest']
+    }
+}

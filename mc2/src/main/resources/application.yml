@@ -1,0 +1,10 @@
+mc:
+  websocket:
+    host: localhost
+    port: 9292
+  kafka:
+    host: localhost
+    port: 9092
+
+server:
+  port: 8082
